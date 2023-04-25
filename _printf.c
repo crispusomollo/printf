@@ -4,14 +4,14 @@ void print_buffer(char buffer[], int *buff_ind);
 
 /**
  * _printf - Printf function
- * @format: The format.
- * Return: Printed characters.
+ * @format: format.
+ * Return: Printed characters
  */
- 
+
 int _printf(const char *format, ...)
 {
-	int j, printed = 0, printed_chars = 0;
-	int flags, width, precision, size, buff_ind = 0;
+	int j, print1 = 0, print2 = 0;
+	int flags, width, precision, size, buffer_index = 0;
 	va_list list;
 	char buffer[BUFF_SIZE];
 
@@ -24,20 +24,20 @@ int _printf(const char *format, ...)
 	{
 		if (format[j] != '%')
 		{
-			buffer[buff_ind++] = format[j];
-			if (buff_ind == BUFF_SIZE)
-				print_buffer(buffer, &buff_ind);
-			printed_chars++;
+			buffer[buffer_index++] = format[j];
+			if (buffer_index == BUFF_SIZE)
+				print_buffer(buffer, &buffer_index);
+			print2++;
 		}
 		else
 		{
 			print_buffer(buffer, &buff_ind);
-			flags = get_flags(format, &j);
-			width = get_width(format, &j, list);
-			precision = get_precision(format, &j, list);
-			size = get_size(format, &j);
-			++j;
-			printed = handle_print(format, &j, list, buffer,
+			flags = get_flags(format, &i);
+			width = get_width(format, &i, list);
+			precision = get_precision(format, &i, list);
+			size = get_size(format, &i);
+			++i;
+			printed = handle_print(format, &i, list, buffer,
 				flags, width, precision, size);
 			if (printed == -1)
 				return (-1);
